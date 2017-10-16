@@ -11,6 +11,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import styled from 'styled-components';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
@@ -29,6 +30,28 @@ import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
+const ZosBoxContainer = styled.div`
+  background: red;
+  color: white;
+  font-weight: bold;
+  padding: 20px;
+  border: 1px solid yellow;
+  box-shadow: 3px 3px 3px #333333;
+
+  h1 {
+    color: blue;
+  }
+`;
+
+const ZosBox = (props) => {
+  return (
+    <ZosBoxContainer>
+      Name: { props.name }
+      <p>{ props.children }</p>
+    </ZosBoxContainer>
+  )
+}
+
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
    * when initial state username is not null, submit the form to load repos
@@ -41,6 +64,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
 
   render() {
     const { loading, error, repos } = this.props;
+
     const reposListProps = {
       loading,
       error,
@@ -51,38 +75,38 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
       <article>
         <Helmet>
           <title>Home Page</title>
-          <meta name="description" content="A React.js Boilerplate application homepage" />
         </Helmet>
         <div>
-          <CenteredSection>
-            <H2>
-              <FormattedMessage {...messages.startProjectHeader} />
-            </H2>
-            <p>
-              <FormattedMessage {...messages.startProjectMessage} />
-            </p>
-          </CenteredSection>
-          <Section>
-            <H2>
-              <FormattedMessage {...messages.trymeHeader} />
-            </H2>
-            <Form onSubmit={this.props.onSubmitForm}>
-              <label htmlFor="username">
-                <FormattedMessage {...messages.trymeMessage} />
-                <AtPrefix>
-                  <FormattedMessage {...messages.trymeAtPrefix} />
-                </AtPrefix>
-                <Input
-                  id="username"
-                  type="text"
-                  placeholder="mxstbr"
-                  value={this.props.username}
-                  onChange={this.props.onChangeUsername}
-                />
-              </label>
-            </Form>
-            <ReposList {...reposListProps} />
-          </Section>
+          <h1>Header</h1>
+
+          <h2>Header</h2>
+
+          <p>
+            Some text herasbndkasb dkjhasb dkjhas vdjhasvd e
+          </p>
+
+          <ul>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+          </ul>
+
+          <ol>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+          </ol>
+
+          <ZosBox name="Zohar asdg asjhdg ajshdg ajsd">
+            This will go below
+          </ZosBox>
+
         </div>
       </article>
     );
